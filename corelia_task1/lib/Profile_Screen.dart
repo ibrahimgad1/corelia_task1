@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       : Icons.light_mode,
                 ),
                 onPressed: () {
-                  themeProvider.toggleTheme(); // Now using toggleTheme
+                  themeProvider.toggleTheme(); 
                 },
               ),
             ],
