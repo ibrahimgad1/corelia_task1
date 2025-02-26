@@ -131,9 +131,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       MaterialPageRoute(builder: (context) => EditProfileScreen(name, bio, profilePic)),
                     );
                     if (result != null) {
-                      ProfileService.updateProfile(result['name'], result['bio'], result['profilePic']);
-                      _loadProfile();
+                      setState(() {
+                        name = result['name'];
+                        bio = result['bio'];
+                        profilePic = result['profilePic'];
+                      });
                     }
+
                   },
                   child: const Text("Edit Profile"),
                 ),
@@ -145,3 +149,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
