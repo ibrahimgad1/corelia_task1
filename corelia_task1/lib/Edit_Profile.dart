@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:corelia_task1/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -85,12 +86,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             TextField(controller: bioController, decoration: const InputDecoration(labelText: 'Bio')),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context, {
-                  'name': nameController.text,
-                  'bio': bioController.text,
-                  'profilePic': newProfilePic,
-                });
+              onPressed: () async {
+                await ProfileService.updateProfile(
+                  nameController.text,
+                  bioController.text,
+                  newProfilePic,
+                );
+
+                if (context.mounted) {
+                  Navigator.pop(context, {
+                    'name': nameController.text,
+                    'bio': bioController.text,
+                    'profilePic': newProfilePic,
+                  });
+                }
               },
               child: const Text("Save"),
             ),
@@ -100,3 +109,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 }
+
